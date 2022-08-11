@@ -34,18 +34,27 @@ namespace CarsPostApplication.Controllers
         {
             return Ok(postRepository.GetPosts());
         }
+        [HttpGet]
+        public IActionResult MyPosts()
+        {
+            string jwt = Request.Cookies["jwt"];
+            var token = options.Verify(jwt);
+
+            string userId = token.Issuer;
+            var user = userRepository.GetUserById(Convert.ToInt32(userId));
+            var posts = context.Posts.Select(x=>new 
+            {
+                x.PostId,
+                x.Title,
+                x.Description,
+                x.Image,
+                x.User.UserName
+            }).ToList().Where(x=>x.UserName==user.UserName);
+            return Ok(posts);
+        }
         [HttpPost]
         public IActionResult Create(Post model)
         {
-            //Car car = new Car
-            //{
-            //    Id = model.Id,
-            //    Title = model.Title,
-            //    Model = model.Model
-            //};
-            //context.Cars.Add(car);
-            //await context.SaveChangesAsync();
-            //return Ok(car);
             var jwt = Request.Cookies["jwt"];
             var token = options.Verify(jwt);
 

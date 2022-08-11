@@ -1,5 +1,5 @@
 ﻿import { useState } from "react"
-import { Redirect } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 function RegisterForm(props) {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -22,11 +22,15 @@ function RegisterForm(props) {
             body: JSON.stringify(newUser)
         })
         let data = await response.json()
-        if (response.ok===true) {
+        console.log(data)
+        if (response.ok === true) {
             console.log(data)
             setRedirect(true)
             props.setName(data.user.userName)
-        }        
+        }
+        else {
+            console.log(response.status, response.errorText)
+        }
     }
     if (redirect) {
         return <Redirect to="/"/>
@@ -51,6 +55,14 @@ function RegisterForm(props) {
                     <button className="w-100 btn btn-lg btn-primary" onClick={registerUser}>Sign up</button>
                 </div>
             </form>
+            <hr></hr>
+            <div className="mt-3 text-center">Already have an account?
+                <div>
+                    <Link to="/login">
+                        <button type="button" className="btn btn-success mt-2">Sign in</button>
+                    </Link>
+                </div>
+            </div>
         </main>
         )
 }

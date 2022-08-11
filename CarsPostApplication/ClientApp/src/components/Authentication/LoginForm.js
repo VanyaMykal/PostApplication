@@ -21,6 +21,7 @@ function LoginForm(props) {
             body: JSON.stringify(credentials)
         })
         const data = await response.json();
+        console.log(data)
         if (response.ok === true) {
             console.log(data)
             setRedirect(true)

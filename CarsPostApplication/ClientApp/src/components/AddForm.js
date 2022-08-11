@@ -48,11 +48,13 @@ function AddForm({ createPost, fetchApi }) {
             description: description,
             image: image
         }
-        await fetch(`https://localhost:44328/api/post/create`, {
+        let response = await fetch(`https://localhost:44328/api/post/create`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newPost)
         })
+        let data = await response.json()
+        console.log(data)
         createPost(newPost)
         fetchApi()
     }

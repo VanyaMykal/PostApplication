@@ -60,17 +60,12 @@ function Navigation(props) {
                 <div className="container-fluid">
                     <div className="d-flex">
                         <Link to="/" className="navbar-brand" style={{ fontFamily: "cursive" }}>Medium</Link>
-                        {/*{props.userName === undefined*/}
-                        {/*    ?*/}
-                        {/*    <div>*/}
-                        {/*        <div><Link to="/" style={{ fontFamily: "cursive" }} className="navbar-brand" onClick={() => setModalRegister(true)}>Add new article</Link></div>*/}
-                        {/*        <MyModal visible={modalRegister} setVisible={setModalRegister}>*/}
-                        {/*            <RegisterForm setName={props.setName} setModal={setModalRegister} />*/}
-                        {/*        </MyModal>*/}
-                        {/*    </div>*/}
-                        {/*    :*/}
-                        {/*    <Link to="/create" className="navbar-brand" style={{ fontFamily: "cursive" }}>Add new article</Link>*/}
-                        {/*}*/}
+                        {props.userName === undefined
+                            ?
+                             <div><Link to="/register" style={{ fontFamily: "cursive",  display: 'block' }} className="navbar-brand">Add new article</Link></div>
+                            :
+                            <Link to="/addpost" className="navbar-brand" style={{ fontFamily: "cursive" }}>Add new article</Link>
+                        }
                     </div>
                     <div>
                         {menu}

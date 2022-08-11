@@ -14,8 +14,8 @@ namespace CarsPostApplication.Models
             {
                 UserName = "Vanya",
                 Email = "vmykal@ukr.net",
-                Password = "123456",
-                ConfirmPassword = "123456"
+                Password = BCrypt.Net.BCrypt.HashPassword("123456"),
+                ConfirmPassword = BCrypt.Net.BCrypt.HashPassword("123456")
             };
             if (!context.Users.Any())
             {
